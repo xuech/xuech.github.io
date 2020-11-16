@@ -5,7 +5,8 @@ module.exports = [
         children: [
             '/guide/js/1',
             '/guide/js/2',
-            '/guide/js/3'
+            '/guide/js/3',
+            '/guide/js/4'
         ]
     },
     {
