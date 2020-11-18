@@ -6,7 +6,9 @@ module.exports = [
             '/guide/js/1',
             '/guide/js/2',
             '/guide/js/3',
-            '/guide/js/4'
+            '/guide/js/4',
+            '/guide/js/5',
+            '/guide/js/6'
         ]
     },
     {
