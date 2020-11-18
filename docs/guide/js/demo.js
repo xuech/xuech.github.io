@@ -14,3 +14,14 @@ const p1 = {
 const p2 = test(p1)
 console.log(p1) // -> ?
 console.log(p2) // -> ?
+
+
+var a = 0, b = 0;
+function Fn(a) {
+  Fn = function (b) {
+    console.log(a + b++);
+  }
+  console.log(a++);
+}
+Fn(2)
+Fn(4)
