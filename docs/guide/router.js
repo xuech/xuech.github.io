@@ -8,7 +8,8 @@ module.exports = [
             '/guide/js/3',
             '/guide/js/4',
             '/guide/js/5',
-            '/guide/js/6'
+            '/guide/js/6',
+            '/guide/js/7'
         ]
     },
     {
