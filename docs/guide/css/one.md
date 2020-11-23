@@ -7,6 +7,7 @@ categories:
 date: 2019-12-28
 ---
 # 如何居中一个元素?
+![1.0](./imgs/1.0.png)
 
 ## 一、水平居中
 1. 行内元素水平居中
@@ -139,12 +140,15 @@ p{
 </div>
 .parent {
   position: relative;
+  background-color: red;
+  height: 100px;
 }
 .child {
   position: absolute;
   top: 50%;
-  height: 100px;
-  margin-top: -50px;
+  height: 20px;
+  margin-top: -10px;
+  background-color: lightblue;
 }
 ```
  - 2.2 如果高度未知，使用`absolute+transform`
@@ -154,11 +158,16 @@ p{
 </div>
 .parent {
   position: relative;
+  background-color: red;
+  height: 100px;
 }
 .child {
   position: absolute;
   top: 50%;
+  /* height: 20px; */
+  /* margin-top: -10px; */
   transform: translateY(-50%);
+  background-color: lightblue;
 }
 ```
  - 2.3 使用`flex+align-items`
@@ -175,18 +184,33 @@ p{
 ## 三、水平垂直居中
 ### 1. 如果已知高宽，绝对定位与负边距实现
 ```js
-<div id='container'>
-  <div id='center' style="width: 100px;height: 100px;background-color: #666">center</div>
+<div class='father'>
+  <div class='child'>固定高度的块级元素。</div>
 </div>
 <style>
-#container {
+.father{
+  width: 800px;
+  height: 400px;
+  background-color: lightblue;
   position: relative;
 }
-#center {
+
+.child {
+  width: 100px;
+  height: 100px;
+  background-color: red;
   position: absolute;
+
   top: 50%;
   left: 50%;
   margin: -50px 0 0 -50px;
+
+  // 这种方式也可以实现
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
+  // margin: auto;
 }
 </style>
 ```
