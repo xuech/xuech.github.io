@@ -13,10 +13,11 @@ module.exports = [
         ]
     },
     {
-        title: "css",
+        title: "CSS常见知识总结",
         children: [
-            '/guide/css/one',
-            '/guide/css/2'
+            '/guide/css/1',
+            '/guide/css/2',
+            '/guide/css/3'
         ]
     },
     {
