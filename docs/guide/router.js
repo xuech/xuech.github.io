@@ -15,7 +15,8 @@ module.exports = [
     {
         title: "css",
         children: [
-            '/guide/css/one'
+            '/guide/css/one',
+            '/guide/css/2'
         ]
     },
     {
