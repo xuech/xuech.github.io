@@ -9,9 +9,47 @@ date: 2020-01-05
  
 ## 1、什么是发布/订阅模式、观察者模式？
 ## 2、如何理解Vue2响应式原理？
+[4](imgs/4.0.png)
+> 【Observer与Dep的关系】通过`Observer`构造函数下的`Object.defineProperty`方法劫持属性的`setter`和`getter`方法，并创建了用于依赖收集的`Dep`对象
+> 【Dep与Watcher的关系】当数据触发get查询时将当前的 `Watcher` 加入到依赖收集池 `Dep` 中；当数据变动时触发`setter`通知之前依赖收集得到的 `Dep` 中的每一个 `Watcher`，告诉它们自己的值改变了，需要重新渲染视图。这时候这些 `Watcher`就会开始调用 `update` 来更新视图。
+
+[参考](https://juejin.cn/post/6857669921166491662)
+
+[参考](https://juejin.cn/post/6896777102369456142)
+
+### 缺点：
+- `Object.defineProperty`的缺点:
+  1. 对于庞大的对象需要一次性递归到底，效率低
+  2. 无法监听新增或删除属性
+     - 设置`Vue.$set`、`Vue.$delete`
+  3. 无法原生监听数组
+     - 对数组进行原型链重写，指向自己定义的数组原型方法
+  ```js
+  // 创建一个原型指向Array.prototype的对象
+  const arrProto = Object.create(Array.prototype) 
+  const methods = ['push', 'pop', 'splice']
+  // 重新定义这些数组方法
+  methods.forEach(method => {
+      arrProto[method] = function (...args) {
+          console.log('更新视图！') // 在这里更新视图
+          Array.prototype[method].apply(this, args)
+      }
+  })
+  // 修改defineReactive函数
+  defineReactive (data, key, val) {
+      this.observe(val)
+      // 监听数组，更换新原型
+      if (Array.isArray(value)) {
+          value.__proto__ = arrProto
+      }
+  }
+  ```
+[1](https://juejin.cn/post/6857669921166491662)
+
 ## 3、vue 的数据驱动原理及如何实现？
 ## 4、vuex的工作原理是什么？
 ## 5、谈一谈nextTick 的原理以及运行机制？
+## 11、描述组件渲染和更新过程，为什么是异步渲染？
 ## 6、聊聊keep-alive 的实现原理和缓存策略
 `keep-alive` 组件接收三个参数，分别为 `include、exclude、max`
 - `include` - 数组、字符串或正则表达式。只有名称匹配的组件会被缓存。
@@ -43,7 +81,7 @@ date: 2020-01-05
 - diff算法中通过tag和key判断是否是sameNode
 - 减少渲染次数，提升渲染性能
 
-## 11、描述组件渲染和更新过程
+
 
 *、优化
 - 如果一个组件是纯展示且不需要有响应式数据状态的处理的可以使用函数式组件(无状态组件)替换， `functional: true`
@@ -64,10 +102,12 @@ date: 2020-01-05
 - 异步组件，分两次渲染
 
 12-15
+keep-alive
 
 12-16
 [MVVM](https://juejin.cn/post/6844904149239201800)
 
 12-17
-
+宏微任务
+https://github.com/zachrey/zblog
 12-18
