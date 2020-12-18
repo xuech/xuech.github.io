@@ -23,7 +23,10 @@ module.exports = [
     {
         title: "vue",
         children: [
-            '/guide/vue/1'
+            '/guide/vue/1',
+            '/guide/vue/2',
+            '/guide/vue/3',
+            '/guide/vue/a',
         ]
     },
     // {

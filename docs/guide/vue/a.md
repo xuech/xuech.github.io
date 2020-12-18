@@ -9,8 +9,11 @@ date: 2020-01-05
  
 ## 1、什么是发布/订阅模式、观察者模式？
 ## 2、如何理解Vue2响应式原理？
-[4](imgs/4.0.png)
+## 3、vue 的数据驱动原理及如何实现？
+![4](./imgs/4.0.png)
+
 > 【Observer与Dep的关系】通过`Observer`构造函数下的`Object.defineProperty`方法劫持属性的`setter`和`getter`方法，并创建了用于依赖收集的`Dep`对象
+> 
 > 【Dep与Watcher的关系】当数据触发get查询时将当前的 `Watcher` 加入到依赖收集池 `Dep` 中；当数据变动时触发`setter`通知之前依赖收集得到的 `Dep` 中的每一个 `Watcher`，告诉它们自己的值改变了，需要重新渲染视图。这时候这些 `Watcher`就会开始调用 `update` 来更新视图。
 
 [参考](https://juejin.cn/post/6857669921166491662)
@@ -44,11 +47,11 @@ date: 2020-01-05
       }
   }
   ```
-[1](https://juejin.cn/post/6857669921166491662)
+[参考](https://juejin.cn/post/6857669921166491662)
 
-## 3、vue 的数据驱动原理及如何实现？
 ## 4、vuex的工作原理是什么？
 ## 5、谈一谈nextTick 的原理以及运行机制？
+
 ## 11、描述组件渲染和更新过程，为什么是异步渲染？
 ## 6、聊聊keep-alive 的实现原理和缓存策略
 `keep-alive` 组件接收三个参数，分别为 `include、exclude、max`
@@ -111,3 +114,8 @@ keep-alive
 宏微任务
 https://github.com/zachrey/zblog
 12-18
+
+
+面试时简历亮点：
+小程序扫描二维码上传到pc
+[二维码扫描登录原理](https://www.cnblogs.com/mq0036/p/12613286.html)
