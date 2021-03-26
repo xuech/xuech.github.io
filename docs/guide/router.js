@@ -19,7 +19,7 @@ module.exports = [
             '/guide/css/1',
             '/guide/css/2',
             '/guide/css/3',
-            // '/guide/css/4'
+            '/guide/css/4'
         ]
     },
     {
