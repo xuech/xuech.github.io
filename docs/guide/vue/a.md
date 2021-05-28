@@ -57,7 +57,7 @@ date: 2020-01-05
 `keep-alive` 组件接收三个参数，分别为 `include、exclude、max`
 - `include` - 数组、字符串或正则表达式。只有名称匹配的组件会被缓存。
 - `exclude` - 数组、字符串或正则表达式。任何名称匹配的组件都不会被缓存。
-- `max` - 数字。最多可以缓存多少组件实例。
+- `max` - 数字。最多可以缓存多少组件实例。 
 ### 实现原理
 组件创建时，新建缓存节点，按序保存key，通过传入的`include、exclude`判断是否命中缓存，命中则从缓存中出vnode实例，否则，加入缓存，判断是否超出最大缓存数量，是，则删除最久未使用节点（LRU）
 组件一旦被缓存，再次渲染时将不会调用`created`和`mounted`函数，如要在缓存组件再次渲染时进行操作的话可以在`activated`和 `deactivated` 函数中
@@ -78,33 +78,53 @@ date: 2020-01-05
 ## 7、你阅读过axios的 源码吗 ？Axios主要有哪些特性？
 
 ## 8、在vue 中 如何 通过createElement创建虚拟dom?
-## 9、如何通过 vue, vue-router, vuex进行权限控制？
+## 9、1？
 
 ## 10、为什么 Vue 中不要用 index 作为 key
 - diff算法中通过tag和key判断是否是sameNode
 - 减少渲染次数，提升渲染性能
 
-
-
-*、优化
+## 12、优化
 - 如果一个组件是纯展示且不需要有响应式数据状态的处理的可以使用函数式组件(无状态组件)替换， `functional: true`
   - 无需维护响应数据
   - 无钩子函数
   - 没有`instance`实例,组件内部没有办法像传统组件一样通过this来访问组件属性
 
+- 数据层级不易过深，合理设置响应式数据
+  - 底层利用递归进行依赖收集
+
 - 合理使用`v-if`与`v-show`
-  - `v-if` 是惰性的，当条件是`false`的时候不渲染dom，而`v-show`无论如何都渲染dom。
-  - `v-if `切换开销大，`v-show`初始渲染开销大。所以对于频繁切换的组件，建议使用`v-show`。
+  1. 手段：v-if是动态的向DOM树内添加或者删除DOM元素；v-show是通过设置DOM元素的display样式属性控制显隐；
+  2. 编译条件：v-if是惰性的，如果初始条件为假，则什么也不做；只有在条件第一次变为真时才开始局部编译；v-show 在任何条件下都会渲染。
+  3. 性能消耗：v-if有更高的切换消耗；v-show有更高的初始渲染消耗；
+  4. 使用场景：v-if适合运营条件不大可能改变；v-show适合频繁切换。
+  5. 注意点：当一个元素默认在css中加了display：none属性，这时通过v-show修改为true是无法让元素显示的。原因是显示隐藏切换，只是会修改element style为display:""或者display:none,并不会覆盖掉或修改已存在的css属性。
 
 - mixin
-- `cache`函数，利用闭包实现缓存
-- 二次依赖收集时，`cleanupDeps`, 剔除上一次存在但本次渲染不存在的依赖
-- `traverse`,处理深度监听数据，解除循环引用
-- 编译优化阶段，`optimize`的主要作用是标记 `static` 静态节点
-- `keep-alive`组件利用lRU缓存淘汰算法
-- 异步组件，分两次渲染
 
-12-15
+## 13、Vue-Router 有几种钩子函数，执行流程是怎样的？
+- 全局守卫(`beforeEach`和`aftrEach`)
+  - 三个参数(to,from,next),`afterEach`函数不用传`next()`函数
+  - 一般用来判断权限等操作
+- 路由守卫(`beforeEnter`，`beforeleave`)
+  - 路由跳转时需要执行的逻辑
+- 组件守卫(`beforeRouteEnter，beforeRouteUpdate,beforeRouteLeave`)
+
+路由解析流程：
+1. 导航被触发
+2. 在失活的组件里调用`beforeRouteLeave`守卫
+3. 调用全局的`beforeEach`守卫
+4. 在重用的组件里调用`beforeRouteUpdate` 守卫
+5. 在路由配置里调用`beforeEnter`
+6. 解析异步路由组件
+7. 在被激活的组件里调用`beforeRouteEnter`
+8. 调用全局的`beforeResolve`守卫
+9. 导航被确认
+10. 调用全局的`afterEach`钩子
+11. 触发DOM更新
+12. 调用`beforeRouteEnter`守卫传给next的回调函数，创建好的组件实例会作为回调函数的参数传入。
+
+## 14
 keep-alive
 
 12-16
