@@ -1,3 +1,11 @@
+---
+title: require源码解析
+tags:
+ - node
+categories: 
+ - 源码
+date: 2021-05-27
+---
 # require源码解析
 
 ## 加载模块的类型
@@ -44,6 +52,9 @@
   - 使用`Module.wrap`对文件内容进行包装
   - 使用`vm.runInThisContext`方法对包装的内容进行处理得到真正的函数
 - 将用户的内容包装到一个函数中 (function (exports,require,module. __filename,__dirname){})
+
+![加载流程](imgs/1.png)
+![查找包的顺序](imgs/2.png)
 
 ```js
 // use 
