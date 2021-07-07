@@ -1,10 +1,9 @@
 ---
 title: 读Vue官方学习文档笔记（一）
 tags:
- - vues
+ - vue
 categories: 
  - frontEnd
-date: 2019-12-28
 ---
 
 <!-- ::: slot header

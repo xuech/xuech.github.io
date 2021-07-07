@@ -1,10 +1,10 @@
 ---
 title: vue-进阶
 tags:
- - vues
+ - vue
 categories: 
  - frontEnd
-date: 2020-02-01
+
 ---
 
 ## vuex的构成
