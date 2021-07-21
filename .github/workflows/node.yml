@@ -50,6 +50,6 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           # 部署到 gh-pages 分支
-          BRANCH: gh-pages
+          BRANCH: master
           # 部署目录为 VuePress 的默认输出目录
           FOLDER: docs/.vuepress/dist
